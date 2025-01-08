@@ -29,7 +29,7 @@ jobs:
 
       - name: Docker Build and push
         run: |
-          docker build -t ttt-app .
+          docker buildx build -t ttt-app .
           docker tag ttt-app zx2a17/ttt-app:v1
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
           docker push zx2a17/ttt-app:v1
