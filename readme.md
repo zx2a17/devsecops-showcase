@@ -27,7 +27,7 @@ the most modern DevSecOps pipeline as of 2025 - Powered by OWASP JuiceShop
      8000
    ```
 
-3) Create a new bucket for the terraform state as backend
+3) Create a new bucket for the terraform state as backend (if wanting to use remote backend)
 
 4) install the following on the master server by creating a script
 
@@ -102,6 +102,11 @@ echo "deb [signed-by=/usr/share/keyrings/nodesource-archive-keyring.gpg] https:/
 sudo apt update
 sudo apt install -y nodejs
 
+# Install Helm
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
 ```
 4) verify all installed correctly
 
@@ -114,6 +119,28 @@ kubectl version
 node -v
 java --version
 ```
+
+
+5) Add Helm repo to prepare for Prometheus/Grafana installation
+```
+# associate the eks cluster
+aws eks --region us-east-1 update-kubeconfig --name EKS_SHOWCASE
+
+helm repo add stable https://charts.helm.sh/stable  
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+# create namespace
+kubectl create namespace monitoring   
+helm install stable prometheus-community/kube-prometheus-stack -n monitoring
+
+# change the service type to LoadBalancer
+kubectl edit svc stable-kube-prometheus-sta-prometheus -n monitoring 
+kubectl edit svc stable-grafana -n monitoring   
+
+```
+
+Accessing Grafana
+The username will be admin and the password will be prom-operator for your Grafana LogIn.
 
 6) Login to Sonar Dashboard
 Load on Browser using the <ec2-public-ip:9000>
