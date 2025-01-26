@@ -120,6 +120,14 @@ node -v
 java --version
 ```
 
+4.1) clone this repo to get the source code for the app as well as the tf script for server provisioning
+then,
+
+assign IAM role to server so it can execute the server provisioning
+
+terraform init, terraform apply - this should take about 20 min to have the cluster set up
+
+
 
 5) Add Helm repo to prepare for Prometheus/Grafana installation
 ```
