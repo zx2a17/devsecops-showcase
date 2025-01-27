@@ -150,6 +150,12 @@ kubectl edit svc stable-grafana -n monitoring
 Accessing Grafana
 The username will be admin and the password will be prom-operator for your Grafana LogIn.
 
+Access Prometheus 
+
+e.g. - make sure to change the LB URL http://acdd27e5f6bf94ca2ae44f174ea21a61-1753689182.us-east-1.elb.amazonaws.com:9090/
+
+add connection point on Grafana
+
 6) Login to Sonar Dashboard
 Load on Browser using the <ec2-public-ip:9000>
 username ==> admin

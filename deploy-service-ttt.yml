@@ -18,6 +18,16 @@ spec:
         image: zx2a17/ttt-app:v1
         ports:
         - containerPort: 3000   # Use port 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
 
 ---
 apiVersion: v1
